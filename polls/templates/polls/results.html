@@ -1,0 +1,17 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="result">
+    <h2 class='template-title'>RESULTS</h2>
+    <h1><span class="q-number">Q{{ question.pk }}:</span> {{ question.question_text }}</h1>
+    {% comment %} <h1>{{ question.question_text }}</h1> {% endcomment %}
+
+    <ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }}<span class='votes-amount'>{{ choice.votes }} vote{{ choice.votes|pluralize }}</span></li>
+    {% endfor %}
+    </ul>
+
+    <a class='vote-again-link' href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+{% endblock %}
